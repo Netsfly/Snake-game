@@ -36,11 +36,16 @@ clock = pygame.time.Clock()
 fruit = FRUIT()
 snake = SNAKE()
 
+SCREEN_UPDATE = pygame.USEREVENT
+pygame.time.set_timer(SCREEN_UPDATE,150)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == SCREEN_UPDATE:
+            snake.move_snake()
             
     screen.fill((175,215,70))
     fruit.draw_fruit()
