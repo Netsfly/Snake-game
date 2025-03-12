@@ -5,6 +5,7 @@ class SNAKE:
     def __init__(self):
         self.body = [Vector2(5,10),Vector2(6,10),Vector2(7,10)]
         self.direction = Vector2(1,0)
+        self.new_block = False
     def draw_snake(self):
         for block in self.body:
             x_pos = int(block.x * cell_size)
@@ -13,9 +14,18 @@ class SNAKE:
             pygame.draw.rect(screen,(183,191,122),block_rect)
 
     def move_snake(self):
-        body_copy = self.body[:-1]
-        body_copy.insert(0,body_copy[0] + self.direction)
-        self.body = body_copy[:]
+        if self.new_block == True:
+            body_copy = self.body[:]
+            body_copy.insert(0,body_copy[0] + self.direction)
+            self.body = body_copy[:]
+            self.new_block = False
+        else: 
+            body_copy = self.body[:-1]
+            body_copy.insert(0,body_copy[0] + self.direction)
+            self.body = body_copy[:]
+        
+    def add_block(self):
+        self.new_block = True
 
 class FRUIT:
     def __init__(self):
@@ -46,7 +56,7 @@ class MAIN:
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:
             self.fruit.randomize()
-    
+            self.snake.add_block()
 pygame.init()
 cell_size = 40
 cell_number = 20
