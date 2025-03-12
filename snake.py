@@ -163,8 +163,8 @@ class MAIN:
         score_y = int(cell_size * cell_number - 40)
         score_rect = score_surface.get_rect(center = (score_x,score_y))
         screen.blit(score_surface,score_rect)              
-      
-      
+
+
 pygame.mixer.pre_init(44100,-16,2,512)                  
 pygame.init()
 cell_size = 40
@@ -173,6 +173,10 @@ screen = pygame.display.set_mode((cell_number * cell_size,cell_number * cell_siz
 clock = pygame.time.Clock()
 apple = pygame.image.load('Graphics/apple.png').convert_alpha()
 game_font = pygame.font.Font('Font/PoetsenOne-Regular.ttf', 25)
+
+pygame.mixer.music.load('Sound/background.mp3')  
+pygame.mixer.music.set_volume(0.2) 
+pygame.mixer.music.play(-1) 
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE,150)
